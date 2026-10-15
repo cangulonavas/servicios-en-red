@@ -1,20 +1,20 @@
-site_name: Introducción a la Nube
+site_name: Servicios en red
 #site_url: https://cangulonavas.github.io/
 use_directory_urls: false
 
 nav:
   - "Inicio": "index.md"
-  - "UD01. Introducción a la Nube Pública": 
-      - "Introducción a la Nube Pública": "ud01/ud01.md"
-      - "Actividad 01. Lanzamiento del Laboratorio": "ud01/actividad01.md"
+#  - "UD01. Introducción a la Nube Pública": 
+#      - "Introducción a la Nube Pública": "ud01/ud01.md"
+#      - "Actividad 01. Lanzamiento del Laboratorio": "ud01/actividad01.md"
 #      - "La Interfaz de Línea de Comandos": "ud01/practica01.md"
-  - "UD02. Capa de Cómputo": 
-      - "Capa de Cómputo": "ud02/ud02.md"
-      - "Actividad 02. Creación de una Máquina Virtual": "ud02/actividad02.md"
-      - "Actividad 03. Creación de una Máquina Linux": "ud02/actividad03.md"
-      - "Actividad 04. Creación de MV con CloudShell": "ud02/actividad04.md"
-  - "UD03. Creación de un entorno de red": 
-      - "Creación de un entorno de red": "ud03/vpc.md"
+#  - "UD02. Capa de Cómputo": 
+#      - "Capa de Cómputo": "ud02/ud02.md"
+#      - "Actividad 02. Creación de una Máquina Virtual": "ud02/actividad02.md"
+#      - "Actividad 03. Creación de una Máquina Linux": "ud02/actividad03.md"
+#      - "Actividad 04. Creación de MV con CloudShell": "ud02/actividad04.md"
+  - "UD03. El servicio DNS": 
+      - "Unidad 3. El servicio DNS": "ud03/ud03.md"
       - "Actividad 06. Creación de una VPC de forma automática": "ud03/actividad06.md"
       - "Actividad 07. Creación de una VPC de forma manual": "ud03/actividad07.md"
 #      - "Práctica 2. Creación de una VPC con 2 subredes": "ud03/redpractica02.md"
