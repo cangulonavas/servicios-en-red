@@ -1,145 +1,303 @@
-﻿# Actividad 07. Creación de una VPC de forma manual
+﻿# Actividad 07. Servidor DNS en Ubuntu
 
-## Objetivo de la práctica
 
-En esta práctica vamos a realizar la creación independiente de los elementos de red desde la consola de AWS, el resultado será el mismo que en la práctica anterior pero se trata de que entiendas qué papel juegan cada uno de los siguientes conceptos en la VPC:
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">Objetivo de la práctica</div> ##
 
-* Red
-* Subred
-* Zona de disponibilidad
-* Dirección IP Pública
-* Nombre de host DNS
-* Gateway de internet IGW
-* Tabla de enrutamiento
+Crear un servidor DNS que sea capaz de resolver zonas directa e indirectamente. 
 
-## Práctica a Realizar
+!!! success "Trabajo a entregar"
+    - Un tutorial de creación y configuración del servidor DNS en Ubuntu que cubra todas las etapas 
+    - Recuerda incluir también capturas correspondientes.
 
-Vamos a crear una VPC y todos sus elementos necesarios paso a paso. La VPC tendrá las siguientes direcciones:
 
-* Red: **192.168.0.0/16**
-* Subred: **192.168.0.0/24**
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">1. Configuración previa</div> ##
 
-!!! success "Captura las pantallas"
-    Esta tarea la **documentarás paso a paso**. Para comprobar que ha funcionado correctamente, al final entregarás también una captura del resultado de **acceder por ssh a las instancia y comprobar su dirección privada**.
 
-## Creación independiente de los elementos de red desde la consola de AWS
+1. Abre el servidor Ubuntu y ejecuta la siguien instrucción:
+```
+nmcli device show
+```
 
-En la práctica anterior hemos creado una VPC completa (utilizando la ayuda para la configuración que nos ofrece AWS) porque ya conocíamos de antemano todos los elementos que necesitábamos. Pero puede darse el caso de que tengamos que crear los  elementos por separado. De eso trata esta alternativa, por tanto, seleccionaremos la opción **Solo la VPC** al crearla.
+2. Asegúrate de que la IP del servidor y del servidor DNS sean la: **192.168.10.5**
 
-### Creación de la VPC
+3. Si es necesario reiniciar la tarje de red ejecuta las siguientes instrucciones:
+```
+sudo ip link set enp0s3 down
+sudo ip link set enp0s3 up
+```
 
-Lo primero es crear una VPC con su direccionamiento (por ejemplo, `192.168.0.0/16`) seleccionando la opción **Solo la VPC**:
+!!! note "Red NAT"
+    Es posible que la red NAT deje de funcionar para Ubuntu Server. En ese caso apaga el servidor y ubícalo en NAT simple.
 
-![](../images/ud03/practica1/001b.png)
 
-![img](../images/ud03/practica1/002b.png)
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Instalar bind9 en el servidor</div> ##
 
-### Creación de las subredes
+1. Ejecuta la siguiente instrucciones:
+```
+sudo apt-get update
+sudo apt install bind9
+```
 
-A continuación, una vez creada la VPC, desde la opción de Subredes, crearemos la subred asociándola a la VPC que acabamos de crear y dándole un nombre y un rango de direcciones IPv4, que debe estar dentro del rango de la VPC. Por ejemplo, podemos asignar el rango **192.168.0.0/24**:
 
-![](../images/ud03/practica1/003b.png)
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">3. Localización de los archivos de DNS</div> ##
 
----
+Localizar los archivos de configuración del servidor DNS bind están en el directorio **/etc/bind**.
 
----
+- Ficheros named: son los ficheros de configuración del servidor.
+- Ficheros .db: son los archivos de base de datos de la zona . 
 
-![](../images/ud03/practica1/004b.png)
+Más adelante configuraremos los archivos .db de nuestra zona de búsqueda directa e inversa.
 
-En este caso no hemos asignado una zona de disponibilidad en concreto, con lo que la subred se puede crear en cualquiera de las seis zonas de disponibilidad que hay en la región del Norte de Virginia (us-east-1).
 
-![](../images/ud03/practica1/005b.png)
+!!! success "Recuerda realizar capturas"
+    Haz captura del contenido de **/etc/bind** y señala con un color los archivos de configuración y con otro los archivos de base de datos
 
-### Comprobación de funcionamiento con una EC2
 
-Vamos a lanzar una instancia EC2 y comprobar si funciona la arquitectura que acabamos de hacer. Para ello, al crear la instancia, seleccionaremos la VPC y subred que hemos creado. 
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">4. Especificar los forwarders</div> ##
 
-![](../images/ud03/practica1/006b.png)
+Los forwarders son los servidores DNS estables a los que tu servidor DNS bind debe enviar las consultas que no sepa resolver.
 
-<br>
+1. Edita el archivo named.conf.options situado en **/etc/bind**
 
-Es importante **habilitar la asignación de una IP pública**.
+2. Busca el apartado forwarders y sustituir la **IP 0.0.0.0** por la IP del servidor **DNS de Google 8.8.8.8**
 
-!!! note "Nota"
-    AWS solo asigna automáticamente direcciones IP públicas en la VPC por defecto, pero no en las creadas por nosotros.
+3. Descomentar todo el apartado quitando las barras inclinadas: **//**
 
+4. Guardar el archivo.
 
+5. Comprobar la sintaxis ejecutando la instrucción:
+```
+named-checkconf /etc/bind/named.conf.options
+```
 
-![](../images/ud03/practica1/006c.png)
+!!! note "Respuesta esperada"
+    Si está todo correcto, el comando anterior no devuelve ninguna respuesta.
 
-<br>
+<img src="../images/ud03/dns11.png" width="75%">
+    
+6. Iniciar el servicio bind9 y comprobar su estado con los comandos siguientes:
+```
+service bind9 start
+service bind9 status
+```
 
-Una vez creado, nos daremos cuenta de que SÍ que se asigna una IP pública pero **NO un nombre de host DNS**. El problema reside en que en la VPC no hemos habilitado esta resolución.
+<img src="../images/ud03/dns12.png" width="75%">
 
-![](../images/ud03/practica1/006d.png)
+7. Ahora tu servidor tiene que ser capaz de resolver cualquier nombre de dominio conocido por el
+servidor 8.8.8.8 de Google ya que le reenviará la consulta. Compruébalo haciendo una consulta:
+```
+nslookup tipo A a www.youtube.com
+```
+<img src="../images/ud03/dns13.png" width="75%">
 
-### Nombre de host DNS
 
-Para habilitar el nombre de host DNS, accedemos al menú de VPC y seleccionaremos la VPC creada:
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">5. Configurar zonas</div> ##
 
-![](../images/ud03/practica1/007b.png)
+1. Vamos a configurar las zonas sobre las cuales tu servidor bind9 tendrá autoridad. Se trata de los ficheros de resolución directa e inversa:
+- una zona directa para la resolución directa (A) → **tunombresmr.com**
+- una zona inversa para la resolución inversa (PTR) → **10.168.192.in-addr.arpa**
 
-<br>
+2. Editar el archivo **/etc/bind/named.conf.local**
 
-Y editaremos la configuración para habilitar la opción **nombres de host DNS**.
+3. Añadir los datos de las zonas como a continuación:
 
-<img src="../images/ud03/practica1/008b.png" width="600">
+<img src="../images/ud03/dns14.png" width="100%">
 
-<br>
+4. Guardar.
 
-Ahora cuando volvamos a comprobar las propiedades de la EC2 creada, podremos ver que ya le ha asignado un nombre de host DNS a través del cual podremos acceder por ssh (también lo podríamos hacer utilizando la ip pública).
+5. Comprobar la sintaxis con el comando:
+```
+named-checkconf /etc/bind/named.conf.local
+```
 
-Cuando intentemos acceder por ssh, nos daremos cuenta de que NO es posible hacerlo, ya que a nuestra VPC le falta un elemento/servicio que permita a todo lo que haya dentro poder configurarse para poder conectarse con el exterior y viceversa. 
 
-### Internet Gateway
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">6. Indicar al servidor que solo tome en cuenta los archivos recién configurados</div> ##
 
-El elemento que nos falta es el *gateway de Internet* (Internet Gateway o puerta de enlace de Internet - IGW). Podemos  crear  este  elemento dede la opción **Puerta  de  enlace  de  Internet** que encontraremos en el menú lateral izquierdo del panel del servicio VPC:
+1. Editar el archivo **/etc/bind/named.conf**
 
-![img](../images/ud03/practica1/010b.png)
+2. Comentamos la linea que hace referencia a **named.conf.default-zones** para indicar al servidor que no haga caso a este archivo.Guardar.
 
----
-<br>
+3. Comprobar la sintaxis con el comando:
+```
+named-checkconf /etc/bind/named.conf
+```
 
-![img](../images/ud03/practica1/011b.png)
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">7. Crear los archivos base de datos de las zonas</div> ##
 
-Si visualizamos el listado de los IGWs que hay creados, veremos que el estado del nuevo IGW aparece como **detached**, así que tendremos que asignárselo a la VPC deseada. En las acciones del IGW, le daremos a conectar a VPC:
+Vamos a crear los 2 archivos que hemos mencionado en el archivo named.conf.local. Para ello haremos copia de los ficheros que ya tenemos en el servidor DNS por defecto.
 
-![img](../images/ud03/practica1/012b.png)
+1. Primero haz una copia del archivo **/etc/bind/db.empty y llámalo tunombresmr.local.db para el servicio de resolución directa:
+```
+sudo cp db.empty tunombresmr.com.db
+```
 
-<br>
+2. A continuación haz una copia del archivo **/etc/bind/db.empty y llámalo db.10.168.192 para el servicio de resolución inversa:
+```
+sudo cp db.empty db.10.168.192
+```
 
-![img](../images/ud03/practica1/014b.png)
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">8. Rellenar los archivos de base de datos de la zona</div> ##
 
-¡Pero seguimos sin poder conectarnos!
+Este paso es muy importante porque vamos a rellenar los dos ficheros, el de resolución directa de zona y el de resolución inversa de zona. Para ello tenemos que configurar adecuadamente la información. Comenzaremos por la resolucón directa y pasaremos después a configurar la inversa.
 
-Falta configurar un elemento encargado de gestionar el tráfico dentro de la VPC: la tabla de enrutamiento.  
+### <div style="background-color: #cfeef1; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">8.1. Archivo db de la zona directa</div> ###
 
-### Tablas de enrutamiento
+!!! note "Nomenclatura de los parámetros"
 
-Al  crear  una  VPC,  se  crea  un  tabla  de  enrutamiento  por defecto, y tenemos que asociarle la subred creada para poder crear rutas para esa subred, desde la opción correspondiente del panel de VPC (puedes localizar la subred entre las distintas que puedan haber observando la VPC a la que pertenece):
+    - Para configurar los ficheros correctamente, ten en cuenta las siguientes nomenclaturas:
+    - Localiza en el pompt de tu terminal del servidor el nombre de cliente y el nombre de servidor: <span style="color: #1d700c;">cangulo@ubuntuserver</span>
 
-![](../images/ud03/practica1/016b.png)
+    - En nuestro ejemplo:
+    - zona → **angulosmr.local.**
+    - nombreservidor → **ubuntuserver**
+    - nombrecliente → **cangulo**
 
-<br>
+1. Edita el archivo **/etc/bind/tunombresmr.com.db** para crear la base de datos de la zona directa
 
-Asociaremos la subred explícitamente, aunque si no lo hacemos, la subred se asocia con la tabla de enrutamiento por defecto de la VPC.
+2. Configura la Base de datos tipo SOA:
 
-![](../images/ud03/practica1/017b.png)
+- Permite configurar el servidor autoritario maestro de la zona
+```
+zona.       IN          SOA     nombreservidor.zona. root.nombreservidor.zona.
+```
 
-Podemos volver a comprobar si nos podemos conectar a la instancia EC2, y seguimos SIN CONEXIÓN. 
+!!! note ¿Quien es root?
+    root.nombreservidor.zona. es el usuario responsable de la zona
 
-Lo único que nos falta es modificar las **rutas de la tabla de enrutamiento** asociada a la subred. Si nos fijamos en las rutas que hay (seleccionando la subred, pestaña ‘Tabla de enrutamiento’), sólo se está enrutando la red de la VPC en local, es  decir  las subredes que tenga a su alcance (192.168.0.0/16). 
+3. Configura la Base de datos tipo NS
 
-Hay que añadir una ruta e indicar  que  todo lo que vaya a `0.0.0.0` (todo el tráfico) salga por el Internet Gateway que hemos creado y asociado a nuestra VPC. Para ello seleccionamos la tabla de enrutamiento, **editamos las rutas**, y seleccionamos la opción **Agregar ruta**:
+- Permite configurar los servidores autoritarios de la zona 
+```
+zona.       IN          NS      nombreservidor.zona.
+```
 
-![](../images/ud03/practica1/018b.png)
+4. Configura los Registros tipo A para servidor y cliente:
 
-Una vez añadida, comprobamos que aparece la nueva ruta en la lista de rutas de la tabla de enrutamiento:
+- Permite asociar los nombres de dominio FQDN de los equipos de la zona con sus IPs
+```
+nombreservidor.zona.    IN      A   192.168.10.5
+nombrecliente.zona.     IN      A   192.168.10.140
+```
 
-![](../images/ud03/practica1/019b.png)
+5. A parte del servidor, vamos a suponer que tenemos otros equipos en nuestra zona. Añadir una línea tipo A para cada uno de estos equipos siguiendo el modelo anterior:
 
-Una vez hecho esto, ahora sí que podremos conectarnos por ssh a cualquier instancia EC2 lanzada en la subred que hemos creado (siempre que la EC2 tenga asignada una dirección IP pública, y de que el grupo de seguridad asociado, concepto del que hablaremos más adelante, permita tráfico entrante al puerto de ssh).
+- un servidor web **llamado www.zona.** con la **IP: 192.168.10.7**
+- un servidor ftp llamado **ftp.zona.** con la **IP 192.168.10.8**
+- un servidor para recibir los correos que se llama **mail.zona.** con su **IP 192.168.10.9**
+- una impresora llamada **impresora1.zona.** con su **IP 192.168.10.29**
 
-!!! success "Captura la pantalla"
-    Accede por ssh a la instancia EC2 y comprueba con el comando `ip a` su dirección privada. Captura la pantalla.
+!!! "note Tienes que tener 6 líneas en tu base de datos tipo A"
+
+6. Configura un par de registros tipo CNAME
+
+- Permite asociar un alias a un nombre de dominio que ya se encuentra en la base de datos tipo A. Crear una línea tipo CNAME para que el nombre ns1 apunte a tu servidor 
+```
+ns1.zona.       IN      CNAME   nombreservidor.zona.
+```
+
+- Añadir otra línea tipo CNAME para que el nombre **info.tunombresmr.com.** apunte a la página web **www.tunombresmr.com.**
+
+7. Guardar el archivo
+
+<img src="../images/ud03/dns16.png" width="100%">
+
+8. Comprobar la sintaxis del fichero con el comando:
+```
+named-checkzone <nombre zona> /etc/bind/<nombre fichero db de la zona>
+```
+
+!!! note "Si está todo correcto tendrás esa respuesta"
+    ```
+    zone angulosmr.local/IN: loaded serial 1
+    OK
+
+!!! warning "¡No olvides el punto!"
+    Suele ser muy habitual olviddardse de incluir el punto al final de las direcciones de resolución.
+    <span style="color: #e91010;">angulosmr.local → error</span>
+    <span style="color: #1d700c;">angulosmr.local. → correcto</span>
+
+### <div style="background-color: #cfeef1; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">8.2. Archivo db de la zona inversa</div> ###
+
+1. Editar el archivo **/etc/bind/db.10.168.192** para crear la base de datos de la zona inversa
+
+2. Configura la Base de datos tipo SOA y base de datos tipo NS del mismo modo que para la zona directa pero indicando **@** en el nombre.
+
+3. Configura el registro tipo PTR
+- Permite asociar las IPs de los equipos de la zona con sus FQDN. Para las búsquedas inversas.
+```
+5       IN      PTR     nombreservidor.zona.
+```
+
+4. Para cada línea tipo A del archivo tunombresmr.com.db tienes que tener una línea tipo PTR en el archivo **db.10.168.192**. 
+
+5. Cambia el puerto serial del archivo, de modo que no sea el mismo que el del archivo de la zona directa. Puedes usar por ejemplo el puerto seria 2 para la zona inversa.
+
+6. Guarda el archivo.
+
+<img src="../images/ud03/dns17.png" width="100%">
+
+7. Comprueba la sintaxis del fichero con el comando:
+```
+named-checkzone <nombre zona> /etc/bind/<nombre fichero db de la zona>
+```
+
+!!! note "Resultado si ha tenido éxito"
+    <img src="../images/ud03/dns18.png" width="100%">
+
+
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">9. Reiniciar el servicio y comprobar el estado</div> ##
+
+1. Una vez comprobado que NO existen errores de sintaxis, reiniciar el servicio y comprobar su estado:
+```
+service bind9 restart
+service bind9 status
+```
+
+<img src="../images/ud03/dns19.png" width="100%">
+
+!!! warning "Servidor Ubuntu a la red NAT"
+    Si todavía no lo has hecho, vuelve a incluir tu servidor Ubuntu en la Red NAT
+
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">10. Indicar al cliente Ubuntu quien es el servidor DNS</div> ##
+
+1. En el cliente deberás configurar estáticamente:
+
+    - IP del cliente Ubuntu: **192.168.10.140** e
+    - IP del servidor DNS: **192.168.10.5**
+    - En el archivo /etc/resolv.conf indicamos que el servidor de nombres nameserver es **192.168.10.5**
+
+!!! note "¿Recuerdas cómo?"
+    En la Actividad02, en el punto 5.1. se indica cómo configurar estáticamente la IP, DNS y demás a un cliente Ubuntu.    
+
+2. Comprueba si ha funcionado ejecutando en la consola el comando nslookup y, a continuación, server. Nos tiene que indicar que el servidor DNS del cliente es 192.168.10.5
+
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">11. Comprobación final</div> ##
+
+1. Desde el cliente, realiza consultas **nslookup** a tu servidor DNS para ver si resuelve:
+
+<span style="color: #8710e9;">a)</span>Petición nslookup al registro tipo A para todos los dispositivos de la zona
+<img src="../images/ud03/dns20.png" width="75%">
+
+<span style="color: #8710e9;">b)</span>Petición nslookup al registro tipo SOA. 
+<img src="../images/ud03/dns21.png" width="75%">
+
+<span style="color: #8710e9;">c)</span>Petición nslookup al registro tipo NS.
+
+<span style="color: #8710e9;">d)</span>Petición nslookup al registro tipo CNAME para los 2 alias de la zona
+
+<span style="color: #8710e9;">e)</span>Petición nslookup a un nombre de dominio de internet que puedes elegir
+
+<span style="color: #8710e9;">f)</span>Petición nslookup de resolución inversa
+<img src="../images/ud03/dns22.png" width="70%">
+
+
+!!! success "ACtividad final"
+    - Realiza la misma actividad pero para un dominio **.com**. 
+    - Recuerda que la tarea consiste en buscar todos los puntos en los que has creado una configuración **.local**
+    - No elimines ningún fichero, simplemente realiza una copia del mismo. Realiza capturas de los mismos.
+
+
+
+
+
 

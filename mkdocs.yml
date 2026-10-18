@@ -15,8 +15,8 @@ nav:
 #      - "Actividad 04. Creación de MV con CloudShell": "ud02/actividad04.md"
   - "UD03. El servicio DNS": 
       - "Unidad 3. El servicio DNS": "ud03/ud03.md"
-      - "Actividad 06. Creación de una VPC de forma automática": "ud03/actividad06.md"
-      - "Actividad 07. Creación de una VPC de forma manual": "ud03/actividad07.md"
+      - "Actividad 07. Servidor DNS en Ubuntu": "ud03/actividad07.md"
+#      - "Actividad 07. Creación de una VPC de forma manual": "ud03/actividad07.md"
 #      - "Práctica 2. Creación de una VPC con 2 subredes": "ud03/redpractica02.md"
 #      - "Práctica 3. Creación de una VPC con CLI": "ud03/redpractica04.md"
 #  - "UD04. Capa de Almacenamiento": 
