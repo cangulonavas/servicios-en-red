@@ -1,7 +1,7 @@
 ﻿# Actividad 07. Servidor DNS en Ubuntu
 
 
-## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">Objetivo de la práctica</div> ##
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">Objetivo de la actividad</div> ##
 
 Crear un servidor DNS que sea capaz de resolver zonas directa e indirectamente. 
 
