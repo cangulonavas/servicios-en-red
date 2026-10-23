@@ -1,0 +1,1767 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../index.html">
+      
+      
+        <link rel="next" href="actividad07.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/cloud-computing.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Unidad 3. El servicio DNS - Servicios en red</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-el-servicio-dns" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../index.html" title="Servicios en red" class="md-header__button md-logo" aria-label="Servicios en red" data-md-component="logo">
+      
+  <img src="../images/cloud-computing.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Servicios en red
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unidad 3. El servicio DNS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Cambiar a modo noche"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo noche" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Cambiar a modo día"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo día" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Servicios en red" class="md-nav__button md-logo" aria-label="Servicios en red" data-md-component="logo">
+      
+  <img src="../images/cloud-computing.png" alt="logo">
+
+    </a>
+    Servicios en red
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD03. El servicio DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD03. El servicio DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3. El servicio DNS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="ud03.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3. El servicio DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-servicio-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El servicio DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-nombres-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Nombres de Dominio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Nombres de Dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dentro-de-los-dominios-de-maximo-nivel-tld-existen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dentro de los dominios de máximo nivel TLD existen:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informacion-adicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información adicional:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-consultas-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Consultas DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-origen-y-normativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Origen y normativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-arquitectura-cliente-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Arquitectura cliente servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-servidor-dns-autoritativo-zona-y-base-de-datos-de-la-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Servidor DNS autoritativo, zona y base de datos de la zona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Servidor DNS autoritativo, zona y base de datos de la zona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-el-espacio-de-nombres-jerarquico-arbol-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El Espacio de Nombres Jerárquico (Árbol DNS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-concepto-de-zona-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Concepto de Zona DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-servidores-dns-autoritativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Servidores DNS Autoritativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-base-de-datos-de-la-zona-registros-de-recurso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Base de Datos de la Zona (Registros de Recurso)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-tipos-de-servidores-dns-y-transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Tipos de servidores DNS y transferencia de zona
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-servidores-dns-y-transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de servidores DNS y transferencia de zona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de servidores DNS y transferencia de zona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transferencia de zona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transferencia de zona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-roles-de-los-servidores-dns-maestro-y-esclavo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Roles de los Servidores DNS (Maestro y Esclavo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-el-proceso-de-transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El Proceso de Transferencia de Zona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ficheros-de-zona-e-interpretacion-de-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Ficheros de Zona e Interpretación de Registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-el-cliente-dns-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El Cliente DNS (Resolver)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-bases-de-datos-del-servidor-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Bases de datos del servidor DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-funcionamiento-de-la-resolucion-de-nombres-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Funcionamiento de la resolución de nombres de dominio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Funcionamiento de la resolución de nombres de dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionamiento general
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolucion-directa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución directa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolución directa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-resolucion-directa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1. Resolución directa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso 1. Resolución directa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-la-peticion-inicial-de-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. La Petición Inicial de la Aplicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-paso-1-en-el-orden-de-prioridad-la-memoria-cache-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Paso 1 en el Orden de Prioridad: La Memoria Caché Local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-paso-2-en-el-orden-de-prioridad-el-archivo-local-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Paso 2 en el Orden de Prioridad: El Archivo local hosts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-paso-3-en-el-orden-de-prioridad-el-servidor-dns-externo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Paso 3 en el Orden de Prioridad: El Servidor DNS Externo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-finalizacion-del-proceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Finalización del Proceso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-resolucion-indirecta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2. Resolución indirecta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso 2. Resolución indirecta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-la-consulta-recursiva-cliente-servidor-dns-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. La Consulta Recursiva (Cliente → Servidor DNS Local)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-el-proceso-de-consultas-iterativas-el-servidor-dns-local-busca-la-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El Proceso de Consultas Iterativas (El Servidor DNS Local busca la IP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-respuesta-final-al-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Respuesta Final al Cliente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-3-resolucion-inversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 3. Resolución inversa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actividad07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 07. Servidor DNS en Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actividad08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 08. Servidor DNS en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-servicio-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El servicio DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-nombres-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Nombres de Dominio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Nombres de Dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dentro-de-los-dominios-de-maximo-nivel-tld-existen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dentro de los dominios de máximo nivel TLD existen:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informacion-adicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información adicional:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-consultas-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Consultas DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-origen-y-normativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Origen y normativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-arquitectura-cliente-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Arquitectura cliente servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-servidor-dns-autoritativo-zona-y-base-de-datos-de-la-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Servidor DNS autoritativo, zona y base de datos de la zona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Servidor DNS autoritativo, zona y base de datos de la zona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-el-espacio-de-nombres-jerarquico-arbol-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El Espacio de Nombres Jerárquico (Árbol DNS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-concepto-de-zona-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Concepto de Zona DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-servidores-dns-autoritativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Servidores DNS Autoritativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-base-de-datos-de-la-zona-registros-de-recurso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Base de Datos de la Zona (Registros de Recurso)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-tipos-de-servidores-dns-y-transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Tipos de servidores DNS y transferencia de zona
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-servidores-dns-y-transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de servidores DNS y transferencia de zona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de servidores DNS y transferencia de zona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transferencia de zona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transferencia de zona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-roles-de-los-servidores-dns-maestro-y-esclavo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Roles de los Servidores DNS (Maestro y Esclavo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-el-proceso-de-transferencia-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El Proceso de Transferencia de Zona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ficheros-de-zona-e-interpretacion-de-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Ficheros de Zona e Interpretación de Registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-el-cliente-dns-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El Cliente DNS (Resolver)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-bases-de-datos-del-servidor-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Bases de datos del servidor DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-funcionamiento-de-la-resolucion-de-nombres-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Funcionamiento de la resolución de nombres de dominio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Funcionamiento de la resolución de nombres de dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionamiento general
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolucion-directa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución directa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolución directa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-resolucion-directa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1. Resolución directa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso 1. Resolución directa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-la-peticion-inicial-de-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. La Petición Inicial de la Aplicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-paso-1-en-el-orden-de-prioridad-la-memoria-cache-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Paso 1 en el Orden de Prioridad: La Memoria Caché Local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-paso-2-en-el-orden-de-prioridad-el-archivo-local-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Paso 2 en el Orden de Prioridad: El Archivo local hosts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-paso-3-en-el-orden-de-prioridad-el-servidor-dns-externo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Paso 3 en el Orden de Prioridad: El Servidor DNS Externo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-finalizacion-del-proceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Finalización del Proceso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-resolucion-indirecta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2. Resolución indirecta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso 2. Resolución indirecta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-la-consulta-recursiva-cliente-servidor-dns-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. La Consulta Recursiva (Cliente → Servidor DNS Local)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-el-proceso-de-consultas-iterativas-el-servidor-dns-local-busca-la-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El Proceso de Consultas Iterativas (El Servidor DNS Local busca la IP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-respuesta-final-al-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Respuesta Final al Cliente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-3-resolucion-inversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 3. Resolución inversa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Unidad 3. El servicio DNS</h1>
+
+<h2 id="1-el-servicio-dns"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">1. El servicio DNS</div></h2>
+<p>El servicio DNS (Domain Name System) o Sistema de Nombres de Dominio sirve para asociar nombres de dominio a direcciones IP.</p>
+<p><img src="../images/ud03/dns01.png" width="50%"></p>
+<div class="admonition success realiza la siguiente prueba">
+<p class="admonition-title">Success</p>
+<p>Introduce la IP <strong>213.162.201.149</strong> en el navegador y verás que te lleva a la página web del Valencia Basket. No obstante, para llegar a esta página web, solemos teclear su nombre de dominio <strong>https://staging.icav.es/</strong></p>
+</div>
+<p>En una red TCP/IP las máquinas se identifican mediante su dirección IP. Sin embargo, para las personas resulta mucho más sencillo recordar el nombre que se asocia a una máquina concreta.</p>
+<p>Conocer el nombre de un servicio en lugar de la IP de la máquina también es más fiable porque:
+- Un servicio (por ejemplo, la página www.valenciabasket.com) puede cambiar de máquina, y entonces de IP, pero no de nombre.
+- Puede haber varios servicios alojados en una única máquina.</p>
+<p>Esto hace necesario establecer un mecanismo de traducción de nombres de dominio a direcciones IP. El DNS es el servicio que proporciona este mecanismo de traducción.</p>
+<h2 id="2-nombres-de-dominio"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Nombres de Dominio</div></h2>
+<p>Un nombre de dominio o dominio es un texto que nos permite identificar un servicio en la red, como una página web, un servidor FTP, un servidor de correo. El dominio tiene que ser único en la red.</p>
+<p>Los nombres de dominio siguen una estructura jerárquica en forma de árbol:</p>
+<p><img src="../images/ud03/dns02.png" width="100%"></p>
+<h3 id="dentro-de-los-dominios-de-maximo-nivel-tld-existen">Dentro de los dominios de máximo nivel TLD existen:</h3>
+<ul>
+<li>dominios genéricos: <strong>arpa, com, edu, net…</strong></li>
+<li>dominios de país: <strong>fr, .es,.uk,.mx...</strong></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">¿Cómo leer un nombre de dominio?</p>
+<ul>
+<li>El nombre de dominio absoluto o FQDN (Fully Qualified Domain Name) se obtiene empezando por el subdominio de nivel más bajo hasta  llegar al dominio raíz.</li>
+<li>Ejemplo de FQDN www.yahoo.com.</li>
+</ul>
+</div>
+<p>La estructura en árbol del espacio de nombres de dominio proporciona un mecanismo de identificación única de un dominio. No puede existir ningún otro dominio que tenga exactamente el mismo nombre absoluto o FQDN.</p>
+<h3 id="informacion-adicional">Información adicional:</h3>
+<p>El dominio raíz (.) y los dominios TLD genéricos son gestionados por la <strong>ICANN</strong> (Internet Corporation for Assigned Names and Numbers) Corporación de Internet para la Asignación de Nombres y Números. La ICANN es también es responsable de asignar las direcciones IP.
+Los dominios de país son registrados por las autoridades locales. En el caso de España la autoridad competente es Red.es.</p>
+<h2 id="3-consultas-dns"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">3. Consultas DNS</div></h2>
+<p>Las consultas <strong>nslookup</strong> o dig nos permiten obtener información sobre nombres de dominio. Son peticiones que se realizan utilizando una herramienta de consola por línea de comandos diseñada para averiguar la correspondencia entre nombres de dominio y direcciones IP.</p>
+<div class="admonition success">
+<p class="admonition-title">Ejemplo</p>
+<p>¿A qué IP apunta el nombre de dominio www.icav.es
+<img src="../images/ud03/dns03.png" width="100%"></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">El parámetro type</p>
+<p>El parámetro type en nslookup sirve para indicarle al servidor DNS qué tipo específico de registro o recurso estás buscando dentro de un dominio.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Devuelve la dirección IPv4 asociada a un nombre de dominio</td>
+</tr>
+<tr>
+<td>AAAA</td>
+<td>Devuelve la dirección IPv6 asociada a un nombre de dominio</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>Devuelve una lista de alias, si existen, para el nombre verdadero (canonical)</td>
+</tr>
+<tr>
+<td>NS</td>
+<td>Devuelve información sobre los servidores DNS autoritativos de la zona</td>
+</tr>
+<tr>
+<td>SOA</td>
+<td>Devuelve información sobre el servidor DNS autoritativo maestro de la zona</td>
+</tr>
+<tr>
+<td>PTR</td>
+<td>Devuelve el nombre de dominio asociado a una IP (inversa de A)</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>Devuelve el servidor encargado de recibir el correo electrónico para el dominio</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-origen-y-normativa"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">4. Origen y normativa</div></h2>
+<p>En los años 70, existía un único archivo llamado hosts que indicaba la correspondencia nombre/IP de todas las máquinas de ARPANET, el predecesor de internet. Cada máquina obtenía una copia actualizada del archivo periódicamente vía FTP.</p>
+<p><img src="../images/ud03/dns04.png" width="100%"></p>
+<p>Pero, con el crecimiento de ARPANET, esta gestión centralizada se hizo inmanejable. Al principio de los años 80 surgió DNS para aportar una solución compatible con una red en constante crecimiento y evolución. Las primeras RFC que describieron el servicio DNS fueron publicadas en 1984. Actualmente los estándares vigentes para DNS son:</p>
+<ul>
+<li>Las RFC 1034 y 1035 que describen el servicio DNS IPv4</li>
+<li>La RFC 1886 que tratan de extensiones para admitir la versión 6 del protocolo IP</li>
+</ul>
+<h2 id="5-arquitectura-cliente-servidor"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">5. Arquitectura cliente servidor</div></h2>
+<p>El servicio DNS se basa en una arquitectura cliente-servidor:</p>
+<ul>
+<li>Servidor DNS: es un equipo que ofrece el servicio DNS, es decir que atiende las peticiones de los clientes traduciendo un nombre de dominio en IP.</li>
+<li>Cliente DNS: es un equipo de la red que solicita la traducción de un nombre de dominio a IP a un servidor DNS. La parte del cliente que se encarga de hacer la petición al servidor y de enviar la respuesta a la aplicación que lo necesita.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Por ejemplo</p>
+<p>El navegador web, en el caso de querer consultar una página web. A este efecto se le llama <strong>resolver un nombre de dominio</strong></p>
+</div>
+<h2 id="6-servidor-dns-autoritativo-zona-y-base-de-datos-de-la-zona"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">6. Servidor DNS autoritativo, zona y base de datos de la zona</div></h2>
+<p><strong>Zona:</strong> es una parte del espacio de nombres de dominio gestionada por un (o más) servidores DNS.
+Los servidores que gestionan la zona se saben todas las relaciones entre nombres de dominio e IPs de la zona gracias a su base de datos (registros). Se dice que tienen autoridad respecto a la zona. En este caso, también hablamos de servidor DNS autoritativo de la zona.</p>
+<p><strong>Base de datos de zona:</strong> son los archivos que almacenan la correspondencia nombres de dominio --&gt; IP de los equipos que pertenecen a la zona.</p>
+<p><img src="../images/ud03/dns05.png" width="100%" style="border: 5px solid #3498db;"></p>
+<p>El diagrama ilustra cómo se divide el espacio de nombres jerárquico de DNS en distintas zonas de autoridad administradas por servidores DNS autoritativos específicos.
+A continuación, se detalla la explicación de cada uno de los conceptos reflejados en la imagen:</p>
+<h5 id="1-el-espacio-de-nombres-jerarquico-arbol-dns"><span style="color: #ff5733;">1. El Espacio de Nombres Jerárquico (Árbol DNS)</h5>
+<p>En la parte superior izquierda se observa la estructura de árbol invertido del DNS:</p>
+<ul>
+<li>El nodo raíz (arriba del todo) se divide en dominios de nivel superior o TLD (como .com, .edu, .org).</li>
+<li>Del dominio <strong>.com</strong> cuelga el subdominio microsoft.</li>
+<li>Del dominio microsoft.com cuelgan otros subdominios como <strong>www, dev</strong> y un subdominio completo llamado ejemplo.</li>
+</ul>
+<h5 id="2-concepto-de-zona-dns"><span style="color: #ff5733;">2. Concepto de Zona DNS</h5>
+<p>Una zona es una parte del árbol DNS que se administra de forma conjunta y delegada. El diagrama muestra que un dominio puede dividirse en varias zonas independientes (representadas por los óvalos amarillos):</p>
+<ul>
+<li><strong>Zona microsoft.com:</strong> Contiene los registros del dominio principal y de subdominios inmediatos como www y dev. Sin embargo, decide delegar la administración de una de sus ramas, llamada ejemplo, a otra entidad.</li>
+<li><strong>Zona ejemplo.microsoft.com:</strong> Al ser delegada, se convierte en una zona completamente independiente con su propio archivo de configuración, que gestiona el host ftp y subdominios inferiores.</li>
+</ul>
+<h5 id="3-servidores-dns-autoritativos"><span style="color: #ff5733;">3. Servidores DNS Autoritativos</h5>
+<p>Cada zona está bajo la responsabilidad de un servidor físico que posee la base de datos oficial (no una copia en caché) de esos nombres:</p>
+<ul>
+<li><strong>Servidor Apolo:</strong> Es el servidor DNS autoritativo para la zona microsoft.com.</li>
+<li><strong>Servidor Artemisa:</strong> Es el servidor DNS autoritativo para la zona ejemplo.microsoft.com.</li>
+</ul>
+<h5 id="4-base-de-datos-de-la-zona-registros-de-recurso"><span style="color: #ff5733;">4. Base de Datos de la Zona (Registros de Recurso)</h5>
+<p>A la derecha se muestran los archivos de zona o bases de datos con registros reales de tipo A (mapeo de nombre a dirección IPv4):</p>
+<ul>
+<li>
+<p>En el servidor Apolo (Zona microsoft.com):</p>
+<ul>
+<li><strong>www.microsoft.com.</strong> apunta a la IP 2.1.16.225.140.</li>
+<li><strong>dev.microsoft.com.</strong> apunta a la IP 2.16.225.18.
+Nota que el subdominio "ejemplo" no aparece aquí porque su autoridad fue delegada al otro servidor.</li>
+</ul>
+</li>
+<li>
+<p>En el servidor Artemisa (Zona ejemplo.microsoft.com):</p>
+<ul>
+<li><strong>ftp.ejemplo.microsoft.com.</strong> apunta a la IP 73.211.3.47.</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-tipos-de-servidores-dns-y-transferencia-de-zona"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">7. Tipos de servidores DNS y transferencia de zona</div></h2>
+<h2 id="tipos-de-servidores-dns-y-transferencia-de-zona">Tipos de servidores DNS y transferencia de zona</h2>
+<p>El estándar DNS establece que hay que configurar al menos dos servidores autoritativos para cada zona: </p>
+<ul>
+<li><strong>Servidor primario (o maestro):</strong> Tiene la base de datos de la zona en versión modificable. Todas las modificaciones sobre una zona, como añadir nombres de dominios, se llevan a cabo en el servidor primario.</li>
+<li><strong>Servidor secundario (esclavo):</strong> contiene una copia de solo lectura de la base de datos de la zona. Así, si el servidor primario falla, el segundo atiende las peticiones de resolución de nombres.</li>
+<li><strong>Servidor caché:</strong> normalmente colocado entre los clientes y los servidores de nombres autoritativos, recibe las respuestas de las consultas DNS de los clientes y las guarda en su caché durante un tiempo (TTL) para responder más rápido a las mismas preguntas si surgen de nuevo.    </li>
+</ul>
+<h3 id="transferencia-de-zona">Transferencia de zona</h3>
+<p>El servidor secundario mantiene el archivo de base de datos de la zona actualizado mediante un mecanismo denominado transferencia de zona. A continuación veremos un ejemplo de este funcionamiento:</p>
+<p><img src="../images/ud03/dns06.png" width="100%" style="border: 5px solid #3498db;"></p>
+<p>Este diagrama ilustra el funcionamiento de la arquitectura <strong>Maestro/Esclavo</strong> en servidores DNS y el proceso de Transferencia de Zona, un mecanismo fundamental para garantizar la redundancia, la tolerancia a fallos y el equilibrio de carga en una infraestructura de red. A continuación, se detalla la explicación analizando los elementos clave del esquema:</p>
+<h5 id="1-roles-de-los-servidores-dns-maestro-y-esclavo"><span style="color: #ff5733;">1. Roles de los Servidores DNS (Maestro y Esclavo)</h5>
+<p>El diagrama muestra que un mismo servidor físico puede tener diferentes roles dependiendo de la zona DNS que gestione:</p>
+<ul>
+<li>
+<p><strong>Servidor DNS Maestro o Primario:</strong> Es el servidor donde el administrador de red crea y modifica directamente los ficheros  de zona a mano. En el diagrama vemos dos zonas maestras diferenciadas:</p>
+<ul>
+<li>El servidor de la izquierda es el maestro único para la zona <strong>zeppelinux.es</strong>.</li>
+<li>El servidor del centro actúa como maestro para una zona distinta llamada <strong>publicaciones.es</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Servidor DNS Esclavo o Secundario:</strong> Es un servidor de respaldo que contiene una copia idéntica de la zona de un maestro. No permite la edición manual de los registros; en su lugar, los obtiene automáticamente del maestro. El diagrama nos muestra dos casos de esclavos:</p>
+<ul>
+<li>El servidor central, además de ser maestro de su propia zona, actúa como esclavo para la zona <strong>zeppelinux.es</strong>.</li>
+<li>El servidor de la derecha actúa como esclavo para la zona <strong>publicaciones.es</strong>.</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-el-proceso-de-transferencia-de-zona"><span style="color: #ff5733;">2. El Proceso de Transferencia de Zona</h5>
+<p>Las flechas verdes gruesas representan la Transferencia de zona (Zone Transfer). Es el protocolo mediante el cual un servidor esclavo se conecta a su servidor maestro correspondiente para descargar una copia exacta del fichero de configuración de la zona.</p>
+<ul>
+<li><strong>Transferencia de zeppelinux.es</strong>: El servidor central (esclavo) solicita y copia el fichero desde el servidor de la izquierda (maestro).</li>
+<li><strong>Transferencia de publicaciones.es</strong>: El servidor de la derecha (esclavo) solicita y copia el fichero desde el servidor central (maestro).</li>
+</ul>
+<h5 id="3-ficheros-de-zona-e-interpretacion-de-registros"><span style="color: #ff5733;">3. Ficheros de Zona e Interpretación de Registros</h5>
+<p>En los recuadros de texto se aprecian los registros de recursos (RR) que se replican textualmente de un servidor a otro:</p>
+<ul>
+<li>Registros Tipo A (Dirección IPv4): Asocian un nombre de host a una IP real.<ul>
+<li><strong>mortadelo.zeppelinux.es</strong> → 192.168.1.21</li>
+<li><strong>filemon.zeppelinux.es</strong> → 192.168.1.22</li>
+</ul>
+</li>
+<li>Registros Tipo CNAME (Alias): Crean un sobrenombre que apunta a un registro A ya existente.<ul>
+<li><strong>www.zeppelinux.es</strong> → alias de mortadelo.zeppelinux.es.</li>
+<li><strong>ftp.zeppelinux.es</strong> → alias de filemon.zeppelinux.es.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-el-cliente-dns-resolver"><span style="color: #ff5733;">4. El Cliente DNS (Resolver)</h4>
+<p>En la esquina inferior izquierda se sitúa el Cliente DNS (instancia de resolución del sistema operativo) conectado a la red (nube).</p>
+<ul>
+<li>El esquema destaca que el cliente puede preguntar a cualquiera de los tres servidores DNS. Al estar todos sincronizados gracias a las transferencias de zona, cualquiera de ellos le devolverá exactamente la misma respuesta de resolución de nombres, logrando que si un servidor se cae, la red siga funcionando con normalidad.</li>
+</ul>
+<h2 id="8-bases-de-datos-del-servidor-dns"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">8. Bases de datos del servidor DNS</div></h2>
+<p>Las bases de datos de un servidor DNS son los conjuntos de archivos estructurados, comúnmente llamados ficheros de zona, donde se almacena toda la información técnica necesaria para mapear nombres de dominio legibles por humanos a sus correspondientes direcciones IP de la máquina, así como otros recursos de la red.</p>
+<p>El servicio DNS utiliza bases de datos de texto plano estructuradas formadas por líneas individuales conocidas como Registros de Recurso (RR).</p>
+<div class="admonition note">
+<p class="admonition-title">Ejemplo de base de datos db.iespuzol.es</p>
+<p>Si en el servidor DNS de un centro educativo se crea una base de datos para la zona local, el archivo de configuración de texto plano se vería exactamente así:</p>
+</div>
+<div class="highlight"><pre><span></span><code>$TTL 1D
+@   IN  SOA  ns1.iespuzol.es. admin.iespuzol.es. (
+             2026101701 ; Número de serie (Fecha del día + revisión)
+             1D         ; Tiempo de refresco para servidores esclavos
+             1H         ; Tiempo de reintento si falla el maestro
+             1W         ; Tiempo de expiración de la copia
+             3H )       ; Caché negativa mínima
+
+; Servidores DNS Autorizados para esta base de datos
+    IN  NS   ns1.iespuzol.es.
+    IN  NS   ns2.iespuzol.es.
+
+; Servidor de Correo de la escuela
+    IN  MX 10 mail.iespuzol.es.
+
+; Mapeos de nombres de Host a IP (Registros A)
+ns1     IN  A    192.168.1.10
+ns2     IN  A    192.168.1.11
+mail    IN  A    192.168.1.20
+server1 IN  A    192.168.1.50
+
+; Alias o Sobrenombres (Registros CNAME)
+www     IN  CNAME server1.iespuzol.es.
+aula3   IN  CNAME server1.iespuzol.es.
+</code></pre></div>
+<h2 id="9-funcionamiento-de-la-resolucion-de-nombres-de-dominio"><div style="background-color: #ff5733; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">9. Funcionamiento de la resolución de nombres de dominio</div></h2>
+<p>La resolución de nombres de dominio es el proceso técnico mediante el cual se traduce un nombre de dominio comprensible para los humanos <strong>como google.com</strong>, en una dirección IP binaria o numérica <strong>como 142.250.200.46</strong> que las máquinas y los routers pueden entender para comunicarse entre sí. Dado que para las personas es mucho más fácil recordar palabras que largas cadenas de números, este mecanismo actúa como la <strong>agenda de contactos</strong> de Internet.</p>
+<p>Veremos tres modos de funcionamiento de la resolución de nombres de dominio:</p>
+<ul>
+<li>Funcionamiento general.</li>
+<li>Resolución directa.</li>
+<li>Resolución inversa.</li>
+</ul>
+<h3 id="funcionamiento-general">Funcionamiento general</h3>
+<p>El servicio DNS utiliza el protocolo DNS para hacer las consultas y las respuestas. Se trata de un protocolo de la capa de aplicación que puede utilizar tanto TCP como UDP en la capa de transporte.</p>
+<p>Servidor y cliente se comunican mediante de puerto 53.</p>
+<h3 id="resolucion-directa">Resolución directa</h3>
+<p>Cuando una aplicación como por ejemplo en navegador web necesita resolver un dominio, la aplicación invoca el <strong>cliente</strong> o la operación  <strong>resolver</strong> para que realice las consultas necesarias y obtenga la respuesta. Luego, el resolver se encarga de pasar la respuesta a la aplicación que lo necesita, en este caso el navegador.</p>
+<p>Antes que nada, el resolver investiga el archivo hosts y la caché. Si no encuentra nada en local, el resolver pregunta al servidor DNS local que tiene configurado.</p>
+<p>En la resolución de nombres, hay 2 tipos de consultas posibles:</p>
+<ul>
+<li>Recursiva: el servidor DNS da una respuesta completa. El cliente consulta a su servidor DNS local de manera recursiva.</li>
+<li>Iterativa: el servidor DNS da una respuesta parcial, por ejemplo, una lista de IP de servidores DNS a los que preguntar para seguir avanzando. Usualmente los servidores se consultan entre ellos de manera iterativa.</li>
+</ul>
+<h4 id="caso-1-resolucion-directa"><div style="background-color: #eeebcf; color: black; width: 100%; padding: 5px 10px; margin: 0; box-sizing: border-box;">Caso 1. Resolución directa</div></h4>
+<p>El servidor DNS encuentra la IP del dominio buscado en su base de datos porque se trata de un dominio de la zona que gestiona. La respuesta será autoritativa.</p>
+<p><img src="../images/ud03/dns07.png" width="100%" style="border: 5px solid #3498db;"></p>
+<p>Este diagrama detalla de forma secuencial los pasos que sigue el sistema de resolución local de un sistema operativo para resolver un nombre de dominio, mostrando el orden de prioridad estricto antes de salir a Internet. A continuación se describe el proceso paso a paso:</p>
+<h5 id="1-la-peticion-inicial-de-la-aplicacion"><span style="color: #ff5733;">1. La Petición Inicial de la Aplicación</h5>
+<ul>
+<li>En el extremo superior izquierdo, una aplicación de red como un navegador web solicita acceder a un sitio web.</li>
+<li>Envía la pregunta (1) <strong>¿www.zeppelinux.es?</strong> al componente interno del sistema operativo encargado de buscar la IP: el <strong>Resolver</strong>.</li>
+</ul>
+<h5 id="2-paso-1-en-el-orden-de-prioridad-la-memoria-cache-local"><span style="color: #ff5733;">2. Paso 1 en el Orden de Prioridad: La Memoria Caché Local</h5>
+<ul>
+<li>El Resolver no sale inmediatamente a la red. Lo primero que hace es consultar la Memoria Caché DNS interna de la propia máquina.</li>
+<li>Envía la consulta (2) ¿www.zeppelinux.es? a la caché.</li>
+<li>Como se observa en la lista (www.google.es, sourceforge.net), el dominio buscado no está almacenado temporalmente ahí, por lo que la caché responde con un (3) No.</li>
+</ul>
+<h5 id="3-paso-2-en-el-orden-de-prioridad-el-archivo-local-hosts"><span style="color: #ff5733;">3. Paso 2 en el Orden de Prioridad: El Archivo local hosts</h5>
+<ul>
+<li>Al no encontrarlo en la caché, el Resolver recurre al archivo estático local del sistema operativo conocido como fichero hosts.</li>
+<li>Envía la consulta (4) ¿www.zeppelinux.es? a este archivo de texto plano.</li>
+<li>La base de datos del archivo contiene únicamente registros locales (mortadelo, filemon, anacleto), de modo que tampoco tiene constancia de esa dirección web y devuelve un (5) No.</li>
+</ul>
+<h5 id="4-paso-3-en-el-orden-de-prioridad-el-servidor-dns-externo"><span style="color: #ff5733;">4. Paso 3 en el Orden de Prioridad: El Servidor DNS Externo</h5>
+<ul>
+<li>Habiendo agotado las opciones locales de almacenamiento del propio equipo (Caché = No, Hosts = No), el Resolver se ve obligado a enviar la petición fuera de la máquina, hacia la red.</li>
+<li>Lanza la consulta (6) ¿www.zeppelinux.es? al Servidor DNS local configurado en la tarjeta de red (el de la escuela o proveedor de Internet).</li>
+<li>El Servidor DNS abre su propia base de datos, localiza el registro de recurso de tipo A (www.zeppelinux.es. IN A 91.199.120.62) y responde de vuelta con la dirección IPv4 pública correspondiente (7) 91.199.120.62.</li>
+</ul>
+<h5 id="5-finalizacion-del-proceso"><span style="color: #ff5733;">5. Finalización del Proceso</h5>
+<ul>
+<li>Una vez que el Resolver recibe la IP del exterior, se la entrega finalmente a la aplicación que hizo la petición mediante la respuesta (8) 91.199.120.62.</li>
+<li>La aplicación ya puede abrir el socket y conectarse directamente al servidor web remoto. (Además, el Resolver guardará esa IP en la Caché local para que la próxima consulta sea instantánea).</li>
+</ul>
+<h4 id="caso-2-resolucion-indirecta"><div style="background-color: #eeebcf; color: black; width: 100%; padding: 5px 10px; margin: 0; box-sizing: border-box;">Caso 2. Resolución indirecta</div></h4>
+<p>Dado que el servidor DNS no tiene ninguna información sobre el dominio buscado. El servidor trasmite la consulta a otro servidor. La respuesta será <strong>NO autoritativa</strong>.</p>
+<p><img src="../images/ud03/dns08.png" width="100%" style="border: 5px solid #3498db;"></p>
+<p>Este diagrama detalla un ejemplo completo de resolución DNS combinada, mostrando la diferencia exacta entre una consulta recursiva y las consultas iterativas necesarias para resolver un nombre de dominio en Internet.
+A continuación, se describe la secuencia completa del proceso paso a paso siguiendo el orden numérico de las flechas:</p>
+<h5 id="1-la-consulta-recursiva-cliente-servidor-dns-local"><span style="color: #ff5733;">1. La Consulta Recursiva (Cliente → Servidor DNS Local)</h5>
+<p>El proceso comienza en el Cliente DNS (Resolver) (extremo izquierdo):</p>
+<ul>
+<li>El cliente realiza una consulta de tipo recursiva (1) preguntando ¿www.zeppelinux.es? a su Servidor DNS Local.</li>
+<li>Significado: En la consulta recursiva, el cliente se desentiende del proceso; le exige al Servidor DNS Local que haga todo el trabajo y no acepte un "no sé" por respuesta hasta encontrar la IP definitiva.</li>
+</ul>
+<h5 id="2-el-proceso-de-consultas-iterativas-el-servidor-dns-local-busca-la-ip"><span style="color: #ff5733;">2. El Proceso de Consultas Iterativas (El Servidor DNS Local busca la IP)</h5>
+<p>Como el Servidor DNS Local no conoce la IP en su caché, inicia una serie de consultas iterativas (flechas azules y naranjas) escalando por la jerarquía global de Internet:</p>
+<ul>
+<li>Paso 1: Consulta al Servidor Raíz (.)<ul>
+<li>El Servidor DNS Local envía la pregunta (2) ¿www.zeppelinux.es? al Servidor DNS raíz (a.root-servers.net).</li>
+<li>El servidor raíz no sabe la IP exacta, pero conoce quién gestiona el dominio de nivel superior (.es). Por tanto, devuelve una Referencia (3): "Pregunta al servidor autorizado para '.es' cuya IP es 195.81.201.11".</li>
+</ul>
+</li>
+<li>Paso 2: Consulta al Servidor del TLD (.es)<ul>
+<li>El Servidor DNS Local acude a la dirección indicada y lanza la consulta (4) ¿www.zeppelinux.es? al servidor de los dominios .es (b.nic.es).</li>
+<li>Este servidor tampoco tiene la IP del host final, pero consulta su base de datos y localiza la delegación del dominio. Devuelve otra Referencia (5): "Pregunta al servidor autorizado para 'zeppelinux.es' cuya IP es 91.199.120.4".</li>
+</ul>
+</li>
+<li>Paso 3: Consulta al Servidor Autoritativo del Dominio (zeppelinux.es)<ul>
+<li>Finalmente, el Servidor DNS Local realiza la última consulta iterativa (6) ¿www.zeppelinux.es? al servidor NS oficial del dominio (://h3m.com).</li>
+<li>Al ser el servidor autorizado, este abre su base de datos de zona, localiza el registro A correspondiente y responde con la IP pública real (7) 91.199.120.62.</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-respuesta-final-al-cliente"><span style="color: #ff5733;">3. Respuesta Final al Cliente</h5>
+<ul>
+<li>Una vez que el Servidor DNS Local ha completado con éxito todas las fases iterativas, vuelve al cliente original y le entrega el resultado de su consulta recursiva mediante la flecha (8) 91.199.120.62.</li>
+<li>El navegador del cliente ya puede conectarse a la página web.</li>
+</ul>
+<h4 id="caso-3-resolucion-inversa"><div style="background-color: #eeebcf; color: black; width: 100%; padding: 5px 10px; margin: 0; box-sizing: border-box;">Caso 3. Resolución inversa</div></h4>
+<p>Es el proceso por el cual dada una dirección IP se obtiene el nombre de un dominio.</p>
+<p>Es utilizada por algunas aplicaciones para comprobar la identidad del cliente, sobre todo por temas de seguridad.</p>
+<p>Las direcciones IP están escritas en orden inverso en el dominio in-addr.arpa.; es decir, se utiliza una notación de puntos invertida.</p>
+<div class="admonition note">
+<p class="admonition-title">Por ejemplo</p>
+<ul>
+<li>Para la IP (192.168.1.2) el servidor de nombres buscará en este orden:</li>
+<li>los servidores arpa.</li>
+<li>luego los servidores in-addr.arpa., </li>
+<li>luego 192.in-addr.arpa.</li>
+<li>luego 168.192.in-addr.arpa. </li>
+<li>y por último, los servidores 1.168.192.in-addr.arpa. En este último encontrará el registro buscado: 2.1.168.192.in-addr.arpa.</li>
+</ul>
+</div>
+<p>El registro de recurso que define la resolución inversa se llama registro PTR.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../index.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Inicio">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Inicio
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="actividad07.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Actividad 07. Servidor DNS en Ubuntu">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Actividad 07. Servidor DNS en Ubuntu
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["header.autohide", "navigation.top", "navigation.tracking", "navigation.footer", "navigation.indexes", "content.code.annotate", "announce.dismiss", "toc.follow", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
