@@ -275,19 +275,19 @@ service bind9 status
 
 1. Desde el cliente, realiza consultas **nslookup** a tu servidor DNS para ver si resuelve:
 
-<span style="color: #8710e9;">a)</span>Petición nslookup al registro tipo A para todos los dispositivos de la zona
+<span style="color: #8710e9;">a)</span> Petición nslookup al registro tipo A para todos los dispositivos de la zona
 <img src="../images/ud03/dns20.png" width="75%">
 
-<span style="color: #8710e9;">b)</span>Petición nslookup al registro tipo SOA. 
+<span style="color: #8710e9;">b)</span> Petición nslookup al registro tipo SOA. 
 <img src="../images/ud03/dns21.png" width="75%">
 
-<span style="color: #8710e9;">c)</span>Petición nslookup al registro tipo NS.
+<span style="color: #8710e9;">c)</span> Petición nslookup al registro tipo NS.
 
-<span style="color: #8710e9;">d)</span>Petición nslookup al registro tipo CNAME para los 2 alias de la zona
+<span style="color: #8710e9;">d)</span> Petición nslookup al registro tipo CNAME para los 2 alias de la zona
 
-<span style="color: #8710e9;">e)</span>Petición nslookup a un nombre de dominio de internet que puedes elegir
+<span style="color: #8710e9;">e)</span> Petición nslookup a un nombre de dominio de internet que puedes elegir
 
-<span style="color: #8710e9;">f)</span>Petición nslookup de resolución inversa
+<span style="color: #8710e9;">f)</span> Petición nslookup de resolución inversa
 <img src="../images/ud03/dns22.png" width="70%">
 
 

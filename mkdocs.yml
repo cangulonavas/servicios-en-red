@@ -16,7 +16,7 @@ nav:
   - "UD03. El servicio DNS": 
       - "Unidad 3. El servicio DNS": "ud03/ud03.md"
       - "Actividad 07. Servidor DNS en Ubuntu": "ud03/actividad07.md"
-#      - "Actividad 07. Creación de una VPC de forma manual": "ud03/actividad07.md"
+      - "Actividad 08. Servidor DNS en Windows": "ud03/actividad08.md"
 #      - "Práctica 2. Creación de una VPC con 2 subredes": "ud03/redpractica02.md"
 #      - "Práctica 3. Creación de una VPC con CLI": "ud03/redpractica04.md"
 #  - "UD04. Capa de Almacenamiento": 
