@@ -94,7 +94,7 @@ nslookup tipo A a www.youtube.com
 ## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">5. Configurar zonas</div> ##
 
 1. Vamos a configurar las zonas sobre las cuales tu servidor bind9 tendrá autoridad. Se trata de los ficheros de resolución directa e inversa:
-- una zona directa para la resolución directa (A) → **tunombresmr.com**
+- una zona directa para la resolución directa (A) → **tunombresmr.local**
 - una zona inversa para la resolución inversa (PTR) → **10.168.192.in-addr.arpa**
 
 2. Editar el archivo **/etc/bind/named.conf.local**
