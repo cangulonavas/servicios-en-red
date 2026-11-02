@@ -29,9 +29,9 @@ Para poder realizar la actividad adecuadamente debemos configurar las máquinas 
     - Por defecto la administración remota está habilitada. Comprobar que sea así.
     - Habilitar también la opción: `Escritorio remoto`
 
-<img src="../images/ud04/actividad10/act10_04.png" width="40%">
+<img src="../images/ud04/actividad10/act10_04.png" width="100%">
 
-## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Acceder al servidor Windows desde el cliente Windows con la IP</div> ##
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">3. Acceder al servidor Windows desde el cliente Windows con la IP</div> ##
 
 1.- En el cliente Windows, abrir la aplicación de escritorio remoto.
 
@@ -50,10 +50,14 @@ Para poder realizar la actividad adecuadamente debemos configurar las máquinas 
     Entrega una captura de pantalla con los cambios de DNS de servidor.
 
 
-## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Acceder al servidor Windows desde el cliente Windows con el nombre de dominio</div> ##
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">4. Acceder al servidor Windows desde el cliente Windows con el nombre de dominio</div> ##
 
 !!! warning "¿Tienes activado el servicio DNS?"
     Recuerda que solo te funcionará si tienes el DNS bien configurado en tu servidor Windows. Compruébalo haciendo, desde el cliente, una consulta nslookup tipo A al nombre de tu servidor.
+
+1.- La conexión deberás hacerla indicando: `Nombre del servidor + tu zona DNS`
+
+<img src="../images/ud04/actividad10/act10_06.png" width="100%">    
 
 !!! success "Capturas de pantalla"
     Entrega una captura de pantalla con la consulta nslookup
@@ -66,16 +70,22 @@ Para poder realizar la actividad adecuadamente debemos configurar las máquinas 
 2.- Apaga el cliente Windows.
 
 
-## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Acceder al servidor Windows desde el cliente Ubuntu</div> ##
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">5. Acceder al servidor Windows desde el cliente Ubuntu</div> ##
 
-1.- En el cliente Ubuntu, abrir el programa Remmina e introducir la IP del servidor Windows. Te pedirá confirmar que te fías del certificado del servidor. 
+1.- En el cliente Ubuntu, abrir el programa **Remmina** e introducir la IP del servidor Windows. Te pedirá confirmar que te fías del certificado del servidor. 
+
+!!! note "Remmina"
+    Remmina es un cliente de acceso remoto **RDP** que viene instalado por defecto en Ubuntu
+
+<img src="../images/ud04/actividad10/act10_07.png" width="15%" style="border: 5px solid #3498db; border-radius: 8px">
 
 2.- A continuación poner el usuario y contraseña del servidor Windows.
 
-<img src="../images/ud04/actividad10/act10_02.png" width="40%">
-
 !!! success "Capturas de pantalla"
     Entrega una captura de pantalla de la conexión al servidor desde el cliente (administrador del servidor visible)
+
+<img src="../images/ud04/actividad10/act10_08.png" width="100%" style="border: 5px solid #3498db; border-radius: 8px">
+
 
 
 

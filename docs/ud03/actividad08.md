@@ -190,3 +190,28 @@ La configuración de la zona inversa se hará de modo muy similar la zona direct
 
 !!! note "Resultado final zona inversa"
     <img src="../images/ud03/act08/act08_16.png" width="100%" style="border: 5px solid #3498db;">
+
+
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">7. Comprobación final</div> ##
+
+1. Desde el cliente ubuntu, realiza consultas **nslookup** a tu servidor DNS para ver si resuelve:
+
+<span style="color: #8710e9;">a)</span> Petición nslookup al registro tipo A para todos los dispositivos de la zona
+
+
+<span style="color: #8710e9;">b)</span> Petición nslookup al registro tipo SOA. 
+
+<img src="../images/ud03/act08/act08_19.png" width="100%">
+
+<span style="color: #8710e9;">c)</span> Petición nslookup al registro tipo NS.
+
+<span style="color: #8710e9;">d)</span> Petición nslookup al registro tipo CNAME para los 2 alias de la zona
+
+<span style="color: #8710e9;">e)</span> Petición nslookup a un nombre de dominio de internet que puedes elegir
+
+<span style="color: #8710e9;">f)</span> Petición nslookup de resolución inversa
+
+!!! success "ACtividad final"
+    - Realiza la misma actividad pero para un dominio **.com**. 
+    - Recuerda que la tarea consiste en buscar todos los puntos en los que has creado una configuración **.local**
+    - No elimines ningún fichero, simplemente realiza una copia del mismo. Realiza capturas de los mismos.
