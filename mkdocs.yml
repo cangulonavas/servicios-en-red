@@ -20,7 +20,8 @@ nav:
   - "UD04. SSH. Acceso remoto": 
       - "Unidad 4. SSH. Acceso remoto": "ud04/ud04.md"
       - "Actividad 09. SSH en servidor Ubuntu": "ud04/actividad09.md"
-      
+      - "Actividad 10. Escritorio remoto en Servidor Windows": "ud04/actividad10.md"
+
 
 
 # ----------------------------------------------------------------------------------------
