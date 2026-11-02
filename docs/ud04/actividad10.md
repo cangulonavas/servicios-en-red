@@ -27,8 +27,9 @@ Para poder realizar la actividad adecuadamente debemos configurar las máquinas 
 
 !!! warning "Acceso remoto activado"
     - Por defecto la administración remota está habilitada. Comprobar que sea así.
-    - No confundir con `Escritorio remoto`
+    - Habilitar también la opción: `Escritorio remoto`
 
+<img src="../images/ud04/actividad10/act10_04.png" width="40%">
 
 ## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Acceder al servidor Windows desde el cliente Windows con la IP</div> ##
 
