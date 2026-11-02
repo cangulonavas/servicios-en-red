@@ -25,15 +25,16 @@ Para poder realizar la actividad adecuadamente debemos configurar las máquinas 
 1.- En el servidor Windows, en `administrador del servidor → servidor local`, habilitar el escritorio remoto.
 
 
-!!! note "Acceso remoto activado"
-    Por defecto la administración remota está habilitada. Comprobar que sea así.
+!!! warning "Acceso remoto activado"
+    - Por defecto la administración remota está habilitada. Comprobar que sea así.
+    - No confundir con `Escritorio remoto`
 
 
 ## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Acceder al servidor Windows desde el cliente Windows con la IP</div> ##
 
 1.- En el cliente Windows, abrir la aplicación de escritorio remoto.
 
-2.- Introducir la IP del servidor al que queremos acceder y, a continuación el usuario y contraseña del servidor.
+2.- Introducir la IP del servidor al que queremos acceder y, a continuación, el usuario y contraseña del servidor.
 
 3.- Si es la primera conexión nos aparece una pestaña de este tipo. Aceptamos el certificado del servidor. Nos tiene que aparecer el escritorio del servidor.
 
@@ -61,6 +62,19 @@ Para poder realizar la actividad adecuadamente debemos configurar las máquinas 
 !!! success "Capturas de pantalla"
     Entrega una captura de pantalla de la conexión al servidor desde el cliente mostrando el servidor.
     
+2.- Apaga el cliente Windows.
+
+
+## <div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Acceder al servidor Windows desde el cliente Ubuntu</div> ##
+
+1.- En el cliente Ubuntu, abrir el programa Remmina e introducir la IP del servidor Windows. Te pedirá confirmar que te fías del certificado del servidor. 
+
+2.- A continuación poner el usuario y contraseña del servidor Windows.
+
+<img src="../images/ud04/actividad10/act10_02.png" width="40%">
+
+!!! success "Capturas de pantalla"
+    Entrega una captura de pantalla de la conexión al servidor desde el cliente (administrador del servidor visible)
 
 
 
