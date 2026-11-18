@@ -1,0 +1,1238 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="actividad12.html">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/cloud-computing.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Actividad 13. Servidor web virtual en Ubuntu - Servicios en red</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#actividad-13-servidor-web-virtual-en-ubuntu" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../index.html" title="Servicios en red" class="md-header__button md-logo" aria-label="Servicios en red" data-md-component="logo">
+      
+  <img src="../images/cloud-computing.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Servicios en red
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Actividad 13. Servidor web virtual en Ubuntu
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Cambiar a modo noche"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo noche" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Cambiar a modo día"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo día" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Servicios en red" class="md-nav__button md-logo" aria-label="Servicios en red" data-md-component="logo">
+      
+  <img src="../images/cloud-computing.png" alt="logo">
+
+    </a>
+    Servicios en red
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD03. El servicio DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD03. El servicio DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/ud03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3. El servicio DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/actividad07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 07. Servidor DNS en Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/actividad08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 08. Servidor DNS en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD04. SSH. Acceso remoto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD04. SSH. Acceso remoto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/ud04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4. SSH. Acceso remoto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/actividad09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 09. SSH en servidor Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/actividad10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 10. Escritorio remoto en Servidor Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/actividad11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 11. SSH con autenticación por claves
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD05. El servicio Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD05. El servicio Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ud05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 5. El servicio web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actividad12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 12. Servidor Web básico en Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 13. Servidor web virtual en Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="actividad13.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 13. Servidor web virtual en Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-actividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la actividad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-configuracion-de-las-maquinas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Configuración de las máquinas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-diferencia-entre-servidores-disponibles-y-activados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Diferencia entre servidores disponibles y activados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-crear-los-archivos-de-configuracion-de-cada-sitio-web-virtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Crear los archivos de configuración de cada sitio web virtual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-editar-los-archivos-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Editar los archivos de configuración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-crear-un-enlace-simbolico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Crear un enlace simbólico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-un-directorio-y-el-archivo-indexhtml-para-cada-sitio-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear un directorio y el archivo index.html para cada sitio web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-configuraicon-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Configuraicón del DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-actividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la actividad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-configuracion-de-las-maquinas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Configuración de las máquinas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-diferencia-entre-servidores-disponibles-y-activados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Diferencia entre servidores disponibles y activados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-crear-los-archivos-de-configuracion-de-cada-sitio-web-virtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Crear los archivos de configuración de cada sitio web virtual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-editar-los-archivos-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Editar los archivos de configuración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-crear-un-enlace-simbolico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Crear un enlace simbólico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-un-directorio-y-el-archivo-indexhtml-para-cada-sitio-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear un directorio y el archivo index.html para cada sitio web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-configuraicon-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Configuraicón del DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="actividad-13-servidor-web-virtual-en-ubuntu">Actividad 13. Servidor Web virtual en Ubuntu</h1>
+<h2 id="objetivo-de-la-actividad"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">Objetivo de la actividad</div></h2>
+<p>El objetivo de esta actividad es el almacenamiento de dos páginas web utilizando el mismo servidor web.</p>
+<p>1.- Cada página web tendrá un nombre de dominio propio: </p>
+<ul>
+<li>Página web para clientes → <code>clientes.angulosmr.local</code></li>
+<li>Página web para proveedores → <code>proveedores.angulosmr.local</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Recuerda cambiar la zona DNS por la tuya</p>
+</div>
+<p>2.Los páginas web compartirán la misma dirección IP y el mismo puerto (80) ya que solo tenemos un servidor web. Es lo que se conoce como configurar servidores virtuales o virtualhosts basados en nombres.</p>
+<h2 id="1-configuracion-de-las-maquinas"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">1. Configuración de las máquinas</div></h2>
+<p>A continuación volvemos a indicar la configuración de las máquinas virtuales</p>
+<div class="admonition success">
+<p class="admonition-title">Servidor Ubuntu</p>
+<ul>
+<li>Debe estar incluida en la <code>Red Nat Servicios</code></li>
+<li>IP → <code>192.168.10.5</code></li>
+<li>DNS → <code>8.8.8.8</code></li>
+</ul>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Cliente Ubuntu</p>
+<ul>
+<li>Debe estar incluida en la <code>Red Nat Servicios</code></li>
+<li>IP → <code>192.168.10.140</code></li>
+<li>DNS → <code>192.168.10.5</code></li>
+</ul>
+</div>
+<h2 id="2-diferencia-entre-servidores-disponibles-y-activados"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">2. Diferencia entre servidores disponibles y activados</div></h2>
+<ul>
+<li>
+<p><strong>available</strong> → servidores virtuales disponibles.</p>
+</li>
+<li>
+<p><strong>enable</strong> → servidores virtuales activados.</p>
+</li>
+</ul>
+<p>1.- Entra al directorio <code>/etc/apache2</code> y lista el contenido. </p>
+<p>2.- Observarás distintos archivos y directorios, entre los cuales están: <code>sites-available</code> y <code>sites-enabled</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">sites-available</p>
+<p>En sites-available tenemos los servidores virtuales disponibles (no están listos para usar).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">sites-enabled</p>
+<p>En sites-enabled tendremos los servidores virtuales activados (listos para usar).</p>
+</div>
+<p>La forma de trabajar consiste en crear los archivos de configuración de la página web en el directorio <code>sitres-available</code> y, luego, activarlos a través de un enlace simbólico tal y como veremos en el paso 3.</p>
+<div class="admonition success">
+<p class="admonition-title">Capturas de pantalla</p>
+<p>Entrega una captura de pantalla del contenido del directorio <code>/etc/apache2</code> señalando los dos directorios mencionados en este paso</p>
+</div>
+<h2 id="3-crear-los-archivos-de-configuracion-de-cada-sitio-web-virtual"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">3. Crear los archivos de configuración de cada sitio web virtual</div></h2>
+<p>1.- Accede al directorio <code>/etc/apache2/sites-available</code> y comprueba que, por defecto, hay dos ficheros.</p>
+<div class="admonition success">
+<p class="admonition-title">Contesta</p>
+<p>¿Cómo se llaman los 2 ficheros de ese directorio?</p>
+</div>
+<p>El fichero que nos interesa es <code>000-default.conf</code> que es donde se ubica la configuración del sitio web por defecto. Para crear 2 sitios virtuales necesitamos un archivo de configuración para cada sitio virtual:</p>
+<p>1.- Crear una copia de <code>000-default.conf</code> y llámala <code>clientes.conf</code>.</p>
+<p>2.- Crear una copia de <code>000-default.conf</code> y llámala <code>proveedores.conf</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Ficheros de configuración</p>
+<ul>
+<li>Los ficheros anteriores servirán para configurar las dos nuevas webs que vamos a crear:</li>
+<li>Web clientes → <code>clientes.angulosmr.local</code></li>
+<li>Web proveedores → <code>proveedores.angulosmr.local</code></li>
+</ul>
+</div>
+<p>3.- Comprueba la creación de tus archivos.</p>
+<div class="admonition success">
+<p class="admonition-title">Capturas de pantalla</p>
+<p>Entrega una captura de las dos copias creadas</p>
+</div>
+<h2 id="4-editar-los-archivos-de-configuracion"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">4. Editar los archivos de configuración</div></h2>
+<p>1.- Editar el fichero <code>clientes.conf</code></p>
+<p>2.- Cambiar el nombre de servidor de la línea <code>ServerName</code> y modificarla así:
+<div class="highlight"><pre><span></span><code>ServerName<span class="w"> </span>clientes.angulosmr.local
+</code></pre></div></p>
+<p>3.- Modificar la línea que hace referencia al directorio raíz de documentos de la página (es decir el directorio donde crearemos los archivos índex en el paso 4):
+<div class="highlight"><pre><span></span><code>DocumentRoot<span class="w"> </span>/var/www/html/clientes/•
+</code></pre></div></p>
+<p>4.- Realiza cambios similares en el fichero <code>proveedores.conf</code></p>
+<h2 id="5-crear-un-enlace-simbolico"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">5. Crear un enlace simbólico</div></h2>
+<p>No es suficiente crear los ficheros de configuración de cada sitio web. Además hay que crear un enlace simbólico a estos ficheros dentro del directorio para activarlos. </p>
+<p>1.- Accede al siguiente directorio:
+<div class="highlight"><pre><span></span><code>/etc/apache2/sites-enabled
+</code></pre></div></p>
+<p>2.- Crear de los enlace simbólico a los ficheros de configuración en <code>sites-enabled</code> con estos comandos:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>a2ensite<span class="w"> </span>clientes.conf
+sudo<span class="w"> </span>a2ensite<span class="w"> </span>proveedores.conf
+</code></pre></div></p>
+<div class="admonition succeso">
+<p class="admonition-title">Contesta las siguientes preguntas</p>
+<ul>
+<li>¿Qué nos contesta la consola cuando ejecutamos los anteriores comandos?</li>
+<li>¿Qué ves después de haber creado los enlaces si ejecutas <code>ls</code>? </li>
+</ul>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Captura de pantalla</p>
+<p>Realuza una captura de lo mostrado anteriormente</p>
+</div>
+<p>3.- Ahora sólo tendremos que recargar la configuración para que Apache tome en cuenta los cambios.
+<div class="highlight"><pre><span></span><code><span class="nv">$service</span><span class="w"> </span>apache2<span class="w"> </span>reload
+</code></pre></div></p>
+<h2 id="6-crear-un-directorio-y-el-archivo-indexhtml-para-cada-sitio-web"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">6. Crear un directorio y el archivo index.html para cada sitio web</div></h2>
+<p>1.- Creamos un directorio para cada sitio web virtual en <code>/var/www/html</code>
+    - crear un directorio clientes
+    - crear un directorio proveedores</p>
+<div class="admonition note">
+<p class="admonition-title">¿Qué son estos directorios?</p>
+<p>Son los directorios que hemos mencionado en el archivos de configuración. Por ejemplo, en <code>clientes.conf</code> hemos añadido la ruta <code>DocumentRoot /var/www/html/clientes/</code></p>
+</div>
+<p>2.- Copiamos el fichero <code>/var/www/html/index.html</code> a los distintos directorios.</p>
+<div class="admonition note">
+<p class="admonition-title">La copia también se tiene que llamar index.html</p>
+</div>
+<p>3.- Modificamos el fichero <code>index.html</code> para que dé un mensaje de bienvenida apropiado:
+<div class="highlight"><pre><span></span><code>&lt;html&gt;
+<span class="w">    </span>&lt;head&gt;
+<span class="w">        </span>&lt;meta<span class="w"> </span><span class="nv">charset</span><span class="o">=</span>”utf-8”&gt;
+<span class="w">        </span>&lt;title&gt;Web<span class="w"> </span>clientes&lt;/title&gt;
+<span class="w">    </span>&lt;/head&gt;
+<span class="w">    </span>&lt;body&gt;
+<span class="w">        </span>&lt;h1&gt;<span class="w"> </span>Bienvenidos<span class="w"> </span>a<span class="w"> </span>la<span class="w"> </span>web<span class="w"> </span>clientes<span class="w"> </span>de<span class="w"> </span>mi<span class="w"> </span>empresa&lt;/h1&gt;
+<span class="w">    </span>&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></p>
+<p>4.- Repetimos la operación para proveedodres en el archivo <code>/var/www/html/proveedores/índex.html</code> </p>
+<p>5.- Modifica el archivo anterior para que dé un mensaje de bienvenida apropiado: </p>
+<p><code>Bienvenidos a la web proveedores de miempresa</code></p>
+<p>6.- Reiniciamos el servicio apache:
+<div class="highlight"><pre><span></span><code>service<span class="w"> </span>apache2<span class="w"> </span>restart
+service<span class="w"> </span>apache2<span class="w"> </span>status
+</code></pre></div></p>
+<h2 id="7-configuraicon-del-dns"><div style="background-color: #f5dcd6; color: black; width: 100%; padding: 0px 5px; margin: 0; box-sizing: border-box;">7. Configuraicón del DNS</div></h2>
+<p>Ahora vamos a modificar los archivos de configuración del DNS:</p>
+<div class="admonition note">
+<p class="admonition-title">Indica tu zona</p>
+<p>Recuerda que debes indicar tu zona DNS en lugar de <code>angulosmr.local</code>.</p>
+</div>
+<p>1.- Para que resuelva los nuevos nombres de host: <code>clientes.angulosmr.local</code> y <code>proveedores.angulosmr.local</code>, crearemos dos alias en el archivo de configuración que apunten a la IP de tu servidor.</p>
+<p>2.- Recuerda indicar la IP de tu servidor en el archivo <code>/etc/resolv.conf</code> para que la resolución se haga con éxito.</p>
+<div class="admonition warning">
+<p class="admonition-title">prueba con nslookup</p>
+<p>Antes que nada, prueba tu DNS con una consulta nslookup a <code>clientes.angulosmr.local</code> y <code>proveedores.angulosmr.local</code></p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Entregas</p>
+<p>1.- Responde a todas las preguntas</p>
+<p>2.- Capturas de pantalla de los archivos de configuración del DNS bind9.</p>
+<p>3.- Captura de pantalla de las consultas nslookup a <code>clientes.angulosmr.local</code> y <code>proveedores.angulosmr.local</code></p>
+<p>4.- Capturas de pantalla del contenido de los archivos de configuración </p>
+<ul>
+<li>Fichero de configuración de clientes → <code>/etc/apache2/sites-available/clientes.conf</code> </li>
+<li>Fichero de configuración de proveedores → <code>/etc/apache2/sites-available/proveedores.conf</code></li>
+</ul>
+<p>5.- Captura de la creación de los enlaces simbólicos.</p>
+<p>6.- Dos capturas de pantalla del cliente accediendo a cada una de las páginas web.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="actividad12.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Actividad 12. Servidor Web básico en Ubuntu">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Actividad 12. Servidor Web básico en Ubuntu
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["header.autohide", "navigation.top", "navigation.tracking", "navigation.footer", "navigation.indexes", "content.code.annotate", "announce.dismiss", "toc.follow", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
