@@ -22,10 +22,10 @@ nav:
       - "Actividad 09. SSH en servidor Ubuntu": "ud04/actividad09.md"
       - "Actividad 10. Escritorio remoto en Servidor Windows": "ud04/actividad10.md"
       - "Actividad 11. SSH con autenticación por claves": "ud04/actividad11.md"      
-  - "UD05. El servicio Web": 
-      - "Unidad 5. El servicio web": "ud05/ud05.md"
-      - "Actividad 12. Servidor Web básico en Ubuntu": "ud05/actividad12.md"   
-      - "Actividad 13. Servidor web virtual en Ubuntu": "ud05/actividad13.md"   
+#  - "UD05. El servicio Web": 
+#      - "Unidad 5. El servicio web": "ud05/ud05.md"
+#      - "Actividad 12. Servidor Web básico en Ubuntu": "ud05/actividad12.md"   
+#      - "Actividad 13. Servidor web virtual en Ubuntu": "ud05/actividad13.md"   
 
 
 
